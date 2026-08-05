@@ -1,0 +1,18 @@
+export const colors = {
+  primary: '#FB6C00',
+  primaryMuted: 'rgba(251, 108, 0, 0.14)',
+  sidebarText: '#1C1C1E',
+  sidebarTextSecondary: '#8E8E93',
+  sidebarSelection: 'rgba(251, 108, 0, 0.18)',
+  headerOnPrimary: '#FFFFFF',
+  headline: '#111827',
+  grey: '#6C7278',
+  stroke: '#EDF1F3',
+  link: '#4D81E7',
+  inputText: '#1A1C1E',
+  cardGlass: 'rgba(255, 255, 255, 0.6)',
+  backgroundTop: '#F5E6D8',
+  backgroundBottom: '#E8E0F0',
+  socialBorder: '#EFF0F6',
+  white: '#FFFFFF',
+} as const;

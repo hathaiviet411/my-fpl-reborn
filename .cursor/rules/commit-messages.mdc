@@ -1,0 +1,80 @@
+---
+description: Quy ước commit message cho repo my-fpl-reborn
+alwaysApply: true
+---
+
+# Commit Message Convention
+
+Mọi commit message phải theo format:
+
+```
+[A] - [B]
+```
+
+## A — loại thay đổi (có thể kết hợp nhiều tag)
+
+| Tag | Dùng khi |
+|-----|----------|
+| `DEV` | Phát triển tính năng mới, cải tiến code |
+| `REFACTOR` | Tái cấu trúc code không đổi hành vi (hoặc đổi tối thiểu) |
+| `BUG` | Sửa lỗi |
+| `DOCS` | Bổ sung hoặc cập nhật tài liệu |
+| `OTHERS` | Việc khác (config, tooling, chore không thuộc các loại trên) |
+
+Nhiều tag: viết liền, không có khoảng trắng giữa các tag.
+
+```
+[DEV][DOCS] - ...
+```
+
+## B — tóm tắt ngắn gọn
+
+- Một dòng duy nhất, mô tả thay đổi bao quát nhất
+- Dùng tiếng Anh hoặc tiếng Việt, nhất quán trong cùng một commit
+- Không kết thúc bằng dấu chấm
+- Imperative mood (ví dụ: "Add", "Fix", "Refactor")
+
+## Ví dụ
+
+```
+[DEV] - Add mock login screen with auth guard
+```
+
+```
+[BUG] - Fix SVG fallback on Expo Go without native modules
+```
+
+```
+[DOCS] - Document architecture layers and design patterns
+```
+
+```
+[REFACTOR] - Restructure auth into repository and core layers
+```
+
+```
+[DEV][DOCS] - Add login screen and update README
+```
+
+```
+[OTHERS] - Configure commit message convention rule
+```
+
+## Cursor Agent — tự động tuân theo rule
+
+Rule file này nằm tại `.cursor/rules/commit-messages.mdc` với `alwaysApply: true`, nên **Cursor Agent trong workspace này sẽ tự đọc và áp dụng** mỗi khi bạn nhờ tạo commit.
+
+Để đảm bảo agent luôn follow:
+
+1. Mở project bằng workspace root `my-fpl-reborn` (không mở từ thư mục cha).
+2. Khi nhờ commit, nói rõ: **"commit theo rule"** hoặc **"commit và push theo commit convention"**.
+3. Kiểm tra rule đang bật: **Cursor Settings → Rules** — rule `commit-messages` phải hiển thị và được apply.
+4. (Tuỳ chọn) Thêm vào **User Rules** (global): *"Trong repo my-fpl-reborn, mọi commit message phải theo `.cursor/rules/commit-messages.mdc`"*.
+
+Agent **không** tự commit trừ khi bạn yêu cầu — rule chỉ định dạng message khi bạn (hoặc agent) tạo commit.
+
+## Khi tạo commit
+
+1. Chọn đúng tag(s) A theo nội dung thay đổi
+2. Viết B ngắn gọn — nếu nhiều thay đổi, chọn mô tả bao quát nhất
+3. Không dùng format Conventional Commits (`feat:`, `fix:`) — dùng format trên
