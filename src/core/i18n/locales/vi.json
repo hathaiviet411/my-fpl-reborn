@@ -52,6 +52,7 @@
     "notifications": "Thông báo",
     "account": "Tài khoản",
     "navigation": "Điều hướng",
+    "qrScan": "Quét mã QR",
     "appName": "MyFPL",
     "appSubtitle": "Fantasy Premier League",
     "appSlogan": "Thực học – Thực nghiệp",
@@ -80,5 +81,24 @@
   },
   "account": {
     "description": "Quản lý hồ sơ và tùy chọn ứng dụng."
+  },
+  "qr": {
+    "title": "Quét mã QR",
+    "close": "Đóng",
+    "uploadFromGallery": "Tải ảnh từ thư viện",
+    "scanAgain": "Quét lại",
+    "noCodeFound": "Không tìm thấy mã QR trong ảnh đã chọn.",
+    "invalidResult": "Không thể mở liên kết",
+    "invalidResultMessage": "Nội dung quét được:\n{{data}}",
+    "unavailableTitle": "Cần build lại ứng dụng",
+    "unavailableMessage": "Tính năng quét QR cần module camera native. Hãy chạy yarn ios hoặc yarn android sau khi cài expo-camera.",
+    "permission": {
+      "cameraTitle": "Cần quyền camera",
+      "cameraMessage": "Ứng dụng cần quyền camera để quét mã QR.",
+      "photosTitle": "Cần quyền thư viện ảnh",
+      "photosMessage": "Ứng dụng cần quyền truy cập ảnh để quét mã QR từ thư viện.",
+      "openSettings": "Mở Cài đặt",
+      "cancel": "Hủy"
+    }
   }
 }

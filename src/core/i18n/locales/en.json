@@ -52,6 +52,7 @@
     "notifications": "Notifications",
     "account": "Account",
     "navigation": "Navigation",
+    "qrScan": "Scan QR code",
     "appName": "MyFPL",
     "appSubtitle": "Fantasy Premier League",
     "appSlogan": "Learn Practically – Practice Professionally",
@@ -80,5 +81,24 @@
   },
   "account": {
     "description": "Manage your profile and app preferences."
+  },
+  "qr": {
+    "title": "Scan QR code",
+    "close": "Close",
+    "uploadFromGallery": "Upload from Gallery",
+    "scanAgain": "Scan Again",
+    "noCodeFound": "No QR code found in the selected image.",
+    "invalidResult": "Unable to open link",
+    "invalidResultMessage": "Scanned content:\n{{data}}",
+    "unavailableTitle": "Rebuild required",
+    "unavailableMessage": "QR scanning needs the native camera module. Run yarn ios or yarn android after installing expo-camera.",
+    "permission": {
+      "cameraTitle": "Camera permission required",
+      "cameraMessage": "This app needs camera access to scan QR codes.",
+      "photosTitle": "Photo library permission required",
+      "photosMessage": "This app needs photo library access to scan QR codes from images.",
+      "openSettings": "Open Settings",
+      "cancel": "Cancel"
+    }
   }
 }

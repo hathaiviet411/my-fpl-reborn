@@ -1,11 +1,10 @@
-import { DrawerToggleButton } from 'expo-router/drawer';
 import { Tabs } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { MainNavbar } from '@/src/components/navigation/MainNavbar';
 import { MainTabBar } from '@/src/components/navigation/MainTabBar';
 import { getTabBarOuterHeight } from '@/src/components/navigation/tabBarConfig';
-import { colors } from '@/src/theme/colors';
 
 export default function TabsLayout() {
   const { t } = useTranslation();
@@ -17,12 +16,7 @@ export default function TabsLayout() {
       initialRouteName="index"
       screenOptions={{
         headerShown: true,
-        headerStyle: { backgroundColor: colors.primary },
-        headerTintColor: colors.headerOnPrimary,
-        headerTitleStyle: { fontWeight: '600' },
-        headerLeft: () => (
-          <DrawerToggleButton tintColor={colors.headerOnPrimary} />
-        ),
+        header: (props) => <MainNavbar {...props} />,
         tabBarShowLabel: false,
         tabBarStyle: {
           position: 'absolute',
