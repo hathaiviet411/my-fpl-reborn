@@ -52,6 +52,13 @@
         {
           "photosPermission": "Allow $(PRODUCT_NAME) to access your photo library to scan QR codes from images."
         }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#FB6C00"
+        }
       ]
     ],
     "scheme": "my-fpl"

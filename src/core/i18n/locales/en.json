@@ -77,7 +77,22 @@
     "description": "Browse your classic and head-to-head leagues."
   },
   "notifications": {
-    "description": "FPL alerts and match reminders will appear here."
+    "description": "FPL alerts and match reminders will appear here.",
+    "permissionPrompt": "Enable push notifications to receive FPL alerts and reminders.",
+    "permissionGranted": "Push notifications are enabled.",
+    "enablePush": "Enable push notifications",
+    "enabling": "Enabling...",
+    "sendTestLocal": "Send test local notification",
+    "testLocalTitle": "Test notification",
+    "testLocalBody": "This is a local notification from MyFPL.",
+    "pushToken": "Expo push token",
+    "simulatorHint": "Push tokens are not available on simulators or emulators.",
+    "permission": {
+      "title": "Notification permission required",
+      "message": "This app needs notification permission to send you alerts.",
+      "openSettings": "Open Settings",
+      "cancel": "Cancel"
+    }
   },
   "account": {
     "description": "Manage your profile and app preferences."

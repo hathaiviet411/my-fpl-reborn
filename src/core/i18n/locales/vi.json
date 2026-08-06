@@ -77,7 +77,22 @@
     "description": "Duyệt các giải classic và head-to-head của bạn."
   },
   "notifications": {
-    "description": "Cảnh báo FPL và nhắc trận sẽ hiển thị tại đây."
+    "description": "Cảnh báo FPL và nhắc trận sẽ hiển thị tại đây.",
+    "permissionPrompt": "Bật thông báo đẩy để nhận cảnh báo và nhắc trận FPL.",
+    "permissionGranted": "Thông báo đẩy đã được bật.",
+    "enablePush": "Bật thông báo đẩy",
+    "enabling": "Đang bật...",
+    "sendTestLocal": "Gửi thông báo local thử",
+    "testLocalTitle": "Thông báo thử",
+    "testLocalBody": "Đây là thông báo local từ MyFPL.",
+    "pushToken": "Expo push token",
+    "simulatorHint": "Push token không khả dụng trên simulator hoặc emulator.",
+    "permission": {
+      "title": "Cần quyền thông báo",
+      "message": "Ứng dụng cần quyền thông báo để gửi cảnh báo cho bạn.",
+      "openSettings": "Mở Cài đặt",
+      "cancel": "Hủy"
+    }
   },
   "account": {
     "description": "Quản lý hồ sơ và tùy chọn ứng dụng."

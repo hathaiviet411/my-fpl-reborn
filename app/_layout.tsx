@@ -13,6 +13,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 
 import { queryClient } from '@/src/core/http/queryClient';
 import { setupNetworkLogger } from '@/src/core/http/setupNetworkLogger';
+import { NotificationBootstrap } from '@/src/components/notifications/NotificationBootstrap';
 import { useAuthGuard } from '@/src/features/auth/hooks/useAuthGuard';
 import { useLocaleStore } from '@/src/stores/localeStore';
 import { colors } from '@/src/theme/colors';
@@ -46,7 +47,12 @@ function RootNavigator() {
     );
   }
 
-  return <Slot />;
+  return (
+    <>
+      <NotificationBootstrap />
+      <Slot />
+    </>
+  );
 }
 
 export default function RootLayout() {
