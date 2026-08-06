@@ -1,3 +1,4 @@
+import { AUTH_ERROR_CODES } from '@/src/features/auth/authErrors';
 import { MockAuthProvider } from '@/src/features/auth/providers/MockAuthProvider';
 
 describe('MockAuthProvider', () => {
@@ -11,14 +12,14 @@ describe('MockAuthProvider', () => {
   });
 
   it('throws when email is invalid', async () => {
-    await expect(provider.login('invalid-email', 'password123')).rejects.toThrow(
-      'Please enter a valid email address.',
+    await expect(provider.login('invalid-email', 'password123')).rejects.toMatchObject(
+      { code: AUTH_ERROR_CODES.INVALID_EMAIL },
     );
   });
 
   it('throws when fields are empty', async () => {
-    await expect(provider.login('', '')).rejects.toThrow(
-      'Email and password are required.',
-    );
+    await expect(provider.login('', '')).rejects.toMatchObject({
+      code: AUTH_ERROR_CODES.EMAIL_PASSWORD_REQUIRED,
+    });
   });
 });

@@ -1,3 +1,7 @@
+import {
+  AUTH_ERROR_CODES,
+  AuthError,
+} from '@/src/features/auth/authErrors';
 import type { AuthProvider } from '@/src/features/auth/providers/AuthProvider';
 import type { AuthSession } from '@/src/features/auth/types';
 
@@ -15,11 +19,11 @@ export class MockAuthProvider implements AuthProvider {
     const trimmedPassword = password.trim();
 
     if (!trimmedEmail || !trimmedPassword) {
-      throw new Error('Email and password are required.');
+      throw new AuthError(AUTH_ERROR_CODES.EMAIL_PASSWORD_REQUIRED);
     }
 
     if (!EMAIL_PATTERN.test(trimmedEmail)) {
-      throw new Error('Please enter a valid email address.');
+      throw new AuthError(AUTH_ERROR_CODES.INVALID_EMAIL);
     }
 
     return {

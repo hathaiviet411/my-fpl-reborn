@@ -1,22 +1,37 @@
+import '@/src/core/i18n';
+import '@/src/core/text/setupGlobalText';
+
 import { GradientView } from '@/src/components/ui/GradientView';
+import { NetworkLoggerProvider } from '@/src/components/dev/NetworkLoggerProvider';
 import { Slot } from 'expo-router';
+import { useEffect } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { QueryClientProvider } from '@tanstack/react-query';
 
 import { queryClient } from '@/src/core/http/queryClient';
+import { setupNetworkLogger } from '@/src/core/http/setupNetworkLogger';
 import { useAuthGuard } from '@/src/features/auth/hooks/useAuthGuard';
+import { useLocaleStore } from '@/src/stores/localeStore';
 import { colors } from '@/src/theme/colors';
 
 if (__DEV__) {
   require('@/src/config/reactotron');
 }
 
-function RootNavigator() {
-  const { isHydrated } = useAuthGuard({ mode: 'root' });
+setupNetworkLogger();
 
-  if (!isHydrated) {
+function RootNavigator() {
+  const { isHydrated: isAuthHydrated } = useAuthGuard({ mode: 'root' });
+  const isLocaleHydrated = useLocaleStore((state) => state.isHydrated);
+  const hydrateLocale = useLocaleStore((state) => state.hydrate);
+
+  useEffect(() => {
+    void hydrateLocale();
+  }, [hydrateLocale]);
+
+  if (!isAuthHydrated || !isLocaleHydrated) {
     return (
       <View style={styles.splash}>
         <GradientView
@@ -35,9 +50,11 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <QueryClientProvider client={queryClient}>
-          <RootNavigator />
-        </QueryClientProvider>
+        <NetworkLoggerProvider>
+          <QueryClientProvider client={queryClient}>
+            <RootNavigator />
+          </QueryClientProvider>
+        </NetworkLoggerProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );

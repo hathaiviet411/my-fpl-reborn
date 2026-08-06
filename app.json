@@ -1,18 +1,23 @@
 {
   "expo": {
-    "name": "my-fpl-reborn",
-    "slug": "my-fpl-reborn",
+    "name": "MyFPL",
+    "slug": "my-fpl",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.polytechnic.myfpl"
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#ffffff",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -24,9 +29,19 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#ffffff",
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 240,
+          "resizeMode": "contain"
+        }
+      ],
       "expo-router",
-      "expo-secure-store"
+      "expo-secure-store",
+      "expo-localization"
     ],
-    "scheme": "my-fpl-reborn"
+    "scheme": "my-fpl"
   }
 }

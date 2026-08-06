@@ -1,6 +1,7 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
+import { AppPressable } from '@/src/components/ui/AppPressable';
 import { colors } from '@/src/theme/colors';
 
 import type { SidebarItem } from './sidebarItems';
@@ -21,15 +22,11 @@ export function SidebarSourceRow({
     : item.icon;
 
   return (
-    <Pressable
+    <AppPressable
       accessibilityRole="button"
       accessibilityState={{ selected }}
       onPress={onPress}
-      style={({ pressed }) => [
-        styles.row,
-        selected && styles.rowSelected,
-        pressed && styles.rowPressed,
-      ]}
+      style={[styles.row, selected && styles.rowSelected]}
     >
       <Ionicons
         name={iconName}
@@ -40,7 +37,7 @@ export function SidebarSourceRow({
       <Text style={[styles.label, selected && styles.labelSelected]}>
         {item.label}
       </Text>
-    </Pressable>
+    </AppPressable>
   );
 }
 
@@ -56,9 +53,6 @@ const styles = StyleSheet.create({
   },
   rowSelected: {
     backgroundColor: colors.sidebarSelection,
-  },
-  rowPressed: {
-    opacity: 0.85,
   },
   icon: {
     width: 22,

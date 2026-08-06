@@ -1,10 +1,9 @@
 import { GradientView } from '@/src/components/ui/GradientView';
+import { AppPressable } from '@/src/components/ui/AppPressable';
 import {
   ActivityIndicator,
-  Pressable,
   StyleSheet,
   Text,
-  View,
 } from 'react-native';
 
 import { colors } from '@/src/theme/colors';
@@ -25,14 +24,11 @@ export function PrimaryButton({
   const isDisabled = disabled || loading;
 
   return (
-    <Pressable
+    <AppPressable
       accessibilityRole="button"
       disabled={isDisabled}
       onPress={onPress}
-      style={({ pressed }) => [
-        styles.wrapper,
-        (pressed || isDisabled) && styles.pressed,
-      ]}
+      style={[styles.wrapper, isDisabled && styles.disabled]}
     >
       <GradientView
         colors={[colors.primary, '#E85F00']}
@@ -46,7 +42,7 @@ export function PrimaryButton({
           <Text style={styles.label}>{label}</Text>
         )}
       </GradientView>
-    </Pressable>
+    </AppPressable>
   );
 }
 
@@ -67,7 +63,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
   },
-  pressed: {
-    opacity: 0.9,
+  disabled: {
+    opacity: 0.6,
   },
 });

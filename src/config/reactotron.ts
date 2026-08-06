@@ -12,7 +12,7 @@ const queryClientManager = new QueryClientManager({
 });
 
 const reactotron = Reactotron.configure({
-  name: 'my-fpl-reborn',
+  name: 'MyFPL',
   onDisconnect: () => {
     queryClientManager.unsubscribe();
   },

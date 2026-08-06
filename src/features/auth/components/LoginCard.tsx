@@ -18,6 +18,6 @@ const styles = StyleSheet.create({
     borderColor: colors.white,
     borderRadius: 12,
     padding: 24,
-    overflow: 'hidden',
+    overflow: 'visible',
   },
 });

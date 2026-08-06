@@ -1,11 +1,9 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 
-import { authIcons } from '@/src/features/auth/assets';
+import { AppPressable } from '@/src/components/ui/AppPressable';
 import { colors } from '@/src/theme/colors';
-import { hasNativeSvg } from '@/src/utils/hasNativeSvg';
-
-const CheckboxIcon = authIcons.checkbox;
 
 type RememberMeRowProps = {
   checked: boolean;
@@ -13,31 +11,36 @@ type RememberMeRowProps = {
 };
 
 export function RememberMeRow({ checked, onToggle }: RememberMeRowProps) {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.row}>
-      <Pressable
+      <AppPressable
         accessibilityRole="checkbox"
         accessibilityState={{ checked }}
+        hitSlop={4}
         onPress={onToggle}
         style={styles.remember}
       >
-        <View style={[styles.checkbox, checked && styles.checkboxChecked]}>
-          {checked ? (
-            hasNativeSvg() ? (
-              <CheckboxIcon height={12} width={12} />
-            ) : (
-              <Ionicons color={colors.primary} name="checkmark" size={12} />
-            )
-          ) : null}
-        </View>
-        <Text style={styles.rememberLabel}>Remember me</Text>
-      </Pressable>
+        <Ionicons
+          color={checked ? colors.primary : colors.grey}
+          name={checked ? 'checkbox' : 'square-outline'}
+          size={20}
+        />
+        <Text style={styles.rememberLabel}>{t('auth.rememberMe')}</Text>
+      </AppPressable>
 
-      <Pressable
-        onPress={() => Alert.alert('Coming soon', 'Forgot password is not available yet.')}
+      <AppPressable
+        hitSlop={8}
+        onPress={() =>
+          Alert.alert(
+            t('common.comingSoonTitle'),
+            t('auth.forgotPasswordComingSoon'),
+          )
+        }
       >
-        <Text style={styles.forgot}>Forgot Password ?</Text>
-      </Pressable>
+        <Text style={styles.forgot}>{t('auth.forgotPassword')}</Text>
+      </AppPressable>
     </View>
   );
 }
@@ -52,21 +55,7 @@ const styles = StyleSheet.create({
   remember: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 5,
-  },
-  checkbox: {
-    width: 19,
-    height: 19,
-    borderRadius: 4,
-    borderWidth: 1,
-    borderColor: colors.stroke,
-    backgroundColor: colors.white,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  checkboxChecked: {
-    borderColor: colors.primary,
-    backgroundColor: colors.primaryMuted,
+    gap: 8,
   },
   rememberLabel: {
     fontSize: 12,

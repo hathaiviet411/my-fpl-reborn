@@ -1,0 +1,65 @@
+{
+  "common": {
+    "comingSoonTitle": "Sắp ra mắt",
+    "comingSoonMessage": "Tính năng này chưa khả dụng.",
+    "language": "Ngôn ngữ"
+  },
+  "auth": {
+    "logIn": "Đăng nhập",
+    "rememberMe": "Ghi nhớ đăng nhập",
+    "forgotPassword": "Quên mật khẩu?",
+    "orLoginWith": "Hoặc đăng nhập với",
+    "continueWithGoogle": "Tiếp tục với Google",
+    "selectCampusPlaceholder": "Chọn cơ sở đào tạo",
+    "searchCampusPlaceholder": "Tìm cơ sở đào tạo...",
+    "searchCampusNoResults": "Không tìm thấy cơ sở.",
+    "campuses": {
+      "hanoi": "Cơ sở Hà Nội",
+      "haiPhong": "Cơ sở Hải Phòng",
+      "thaiNguyen": "Cơ sở Thái Nguyên",
+      "haNam": "Cơ sở Hà Nam",
+      "thanhHoa": "Cơ sở Thanh Hóa",
+      "hue": "Cơ sở Huế",
+      "daNang": "Cơ sở Đà Nẵng",
+      "quyNhon": "Cơ sở Quy Nhơn",
+      "tayNguyen": "Cơ sở Tây Nguyên",
+      "hoChiMinh": "Cơ sở Hồ Chí Minh",
+      "dongNai": "Cơ sở Đồng Nai",
+      "canTho": "Cơ sở Cần Thơ",
+      "vinhPhuc": "Cơ sở Vĩnh Phúc"
+    },
+    "signOut": "Đăng xuất",
+    "account": "Tài khoản",
+    "loginFailed": "Đăng nhập thất bại",
+    "loginFailedGeneric": "Không thể đăng nhập.",
+    "googleLoginComingSoon": "Đăng nhập Google chưa khả dụng.",
+    "forgotPasswordComingSoon": "Quên mật khẩu chưa khả dụng.",
+    "faceIdLogin": "Đăng nhập bằng Face ID",
+    "faceIdComingSoon": "Đăng nhập Face ID chưa khả dụng.",
+    "errors": {
+      "emailPasswordRequired": "Email và mật khẩu là bắt buộc.",
+      "invalidEmail": "Vui lòng nhập địa chỉ email hợp lệ."
+    }
+  },
+  "navigation": {
+    "home": "Trang chủ",
+    "squad": "Đội hình",
+    "fixtures": "Lịch thi đấu",
+    "leagues": "Giải đấu",
+    "navigation": "Điều hướng",
+    "appName": "MyFPL",
+    "appSubtitle": "Fantasy Premier League"
+  },
+  "home": {
+    "description": "Vuốt từ cạnh trái hoặc chạm biểu tượng menu để mở thanh bên."
+  },
+  "squad": {
+    "description": "Quản lý đội hình Fantasy Premier League của bạn tại đây."
+  },
+  "fixtures": {
+    "description": "Xem lịch thi đấu các vòng sắp tới và đã qua."
+  },
+  "leagues": {
+    "description": "Duyệt các giải classic và head-to-head của bạn."
+  }
+}

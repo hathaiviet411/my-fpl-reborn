@@ -23,3 +23,10 @@ export const authIcons = {
   apple: Apple,
   phone: Phone,
 } as const;
+
+export const authImages = {
+  loginLogo: require('../../../assets/auth/images/logo.png'),
+  flagVietnam: require('../../../assets/auth/icons/vietnam.png'),
+  flagUnitedKingdom: require('../../../assets/auth/icons/united-kingdom.png'),
+  faceId: require('../../../assets/auth/icons/face-id.png'),
+} as const;

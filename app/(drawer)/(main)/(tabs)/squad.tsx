@@ -1,10 +1,14 @@
+import { useTranslation } from 'react-i18next';
+
 import { ScreenPlaceholder } from '@/src/components/ScreenPlaceholder';
 
 export default function SquadScreen() {
+  const { t } = useTranslation();
+
   return (
     <ScreenPlaceholder
-      title="Squad"
-      description="Manage your Fantasy Premier League squad here."
+      title={t('navigation.squad')}
+      description={t('squad.description')}
     />
   );
 }

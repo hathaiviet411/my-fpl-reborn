@@ -1,0 +1,65 @@
+{
+  "common": {
+    "comingSoonTitle": "Coming soon",
+    "comingSoonMessage": "This feature is not available yet.",
+    "language": "Language"
+  },
+  "auth": {
+    "logIn": "Log In",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot Password ?",
+    "orLoginWith": "Or login with",
+    "continueWithGoogle": "Continue with Google",
+    "selectCampusPlaceholder": "Select training campus",
+    "searchCampusPlaceholder": "Search campus...",
+    "searchCampusNoResults": "No campus found.",
+    "campuses": {
+      "hanoi": "Hanoi Campus",
+      "haiPhong": "Hai Phong Campus",
+      "thaiNguyen": "Thai Nguyen Campus",
+      "haNam": "Ha Nam Campus",
+      "thanhHoa": "Thanh Hoa Campus",
+      "hue": "Hue Campus",
+      "daNang": "Da Nang Campus",
+      "quyNhon": "Quy Nhon Campus",
+      "tayNguyen": "Tay Nguyen Campus",
+      "hoChiMinh": "Ho Chi Minh Campus",
+      "dongNai": "Dong Nai Campus",
+      "canTho": "Can Tho Campus",
+      "vinhPhuc": "Vinh Phuc Campus"
+    },
+    "signOut": "Sign out",
+    "account": "Account",
+    "loginFailed": "Login failed",
+    "loginFailedGeneric": "Unable to log in.",
+    "googleLoginComingSoon": "Google login is not available yet.",
+    "forgotPasswordComingSoon": "Forgot password is not available yet.",
+    "faceIdLogin": "Sign in with Face ID",
+    "faceIdComingSoon": "Face ID login is not available yet.",
+    "errors": {
+      "emailPasswordRequired": "Email and password are required.",
+      "invalidEmail": "Please enter a valid email address."
+    }
+  },
+  "navigation": {
+    "home": "Home",
+    "squad": "Squad",
+    "fixtures": "Fixtures",
+    "leagues": "Leagues",
+    "navigation": "Navigation",
+    "appName": "MyFPL",
+    "appSubtitle": "Fantasy Premier League"
+  },
+  "home": {
+    "description": "Swipe from the left or tap the menu icon to open the sidebar."
+  },
+  "squad": {
+    "description": "Manage your Fantasy Premier League squad here."
+  },
+  "fixtures": {
+    "description": "View upcoming and past gameweek fixtures."
+  },
+  "leagues": {
+    "description": "Browse your classic and head-to-head leagues."
+  }
+}

@@ -1,13 +1,13 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import {
-  Pressable,
   StyleSheet,
   TextInput,
   View,
   type TextInputProps,
 } from 'react-native';
 
+import { AppPressable } from '@/src/components/ui/AppPressable';
 import { AuthSvgIcon } from '@/src/components/ui/AuthSvgIcon';
 import { authIcons } from '@/src/features/auth/assets';
 import { colors } from '@/src/theme/colors';
@@ -35,7 +35,7 @@ export function AuthTextField({
         {...props}
       />
       {isPassword ? (
-        <Pressable
+        <AppPressable
           accessibilityRole="button"
           accessibilityLabel="Toggle password visibility"
           hitSlop={8}
@@ -50,7 +50,7 @@ export function AuthTextField({
             height={16}
             width={16}
           />
-        </Pressable>
+        </AppPressable>
       ) : null}
     </View>
   );

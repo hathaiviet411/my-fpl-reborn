@@ -1,11 +1,13 @@
 import { Redirect } from 'expo-router';
 import { Drawer } from 'expo-router/drawer';
+import { useTranslation } from 'react-i18next';
 
 import { DrawerContent } from '@/src/components/navigation/DrawerContent';
 import { useAuthGuard } from '@/src/features/auth/hooks/useAuthGuard';
 import { colors } from '@/src/theme/colors';
 
 export default function DrawerLayout() {
+  const { t } = useTranslation();
   const { isAuthenticated, isHydrated } = useAuthGuard({ mode: 'requireAuth' });
 
   if (isHydrated && !isAuthenticated) {
@@ -31,8 +33,8 @@ export default function DrawerLayout() {
       <Drawer.Screen
         name="(main)"
         options={{
-          drawerLabel: 'Home',
-          title: 'Home',
+          drawerLabel: t('navigation.home'),
+          title: t('navigation.home'),
         }}
       />
     </Drawer>

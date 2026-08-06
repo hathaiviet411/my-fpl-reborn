@@ -1,0 +1,22 @@
+---
+description: Nguyên tắc phản hồi chạm cho mọi thành phần tương tác
+alwaysApply: true
+---
+
+# UI Interaction — Touch Feedback
+
+Mọi thành phần **có thể nhấn** (nút, link, checkbox, menu item, icon button, v.v.) **bắt buộc** có phản hồi khi chạm.
+
+## Quy tắc
+
+1. Dùng `AppPressable` từ `@/src/components/ui/AppPressable` thay cho `Pressable` / `TouchableOpacity` trực tiếp.
+2. Mặc định: hiệu ứng giống `TouchableOpacity` (`activeOpacity = 0.7`).
+3. Không để `Pressable` “trần” không có feedback (trừ overlay vô hình đóng modal/dropdown — vẫn dùng `AppPressable` để nhất quán).
+4. Nếu control đã có feedback tùy chỉnh (ví dụ scale bằng Reanimated), truyền `disableFeedback` và đảm bảo vẫn có animation khi nhấn.
+5. Trạng thái `disabled`: không áp dụng opacity khi nhấn; dùng style riêng (ví dụ `opacity: 0.6`) nếu cần.
+
+## Ví dụ áp dụng
+
+- Ghi nhớ đăng nhập, Quên mật khẩu
+- Nút Đăng nhập, Face ID, Tiếp tục với Google
+- Campus select, toggle mật khẩu, sidebar rows, đăng xuất

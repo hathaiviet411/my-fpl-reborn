@@ -1,13 +1,16 @@
 import { usePathname, useRouter } from 'expo-router';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { AppPressable } from '@/src/components/ui/AppPressable';
+import { LanguageSwitcher } from '@/src/components/i18n/LanguageSwitcher';
 import { useAuthStore } from '@/src/stores/authStore';
 import { colors } from '@/src/theme/colors';
 
 import { SidebarBackdrop } from './SidebarBackdrop';
 import { SidebarSourceRow } from './SidebarSourceRow';
-import { sidebarSections } from './sidebarItems';
+import { getSidebarSections } from './sidebarItems';
 
 type DrawerContentProps = {
   navigation: {
@@ -24,10 +27,12 @@ function isRouteSelected(pathname: string, route: string) {
 }
 
 export function DrawerContent({ navigation }: DrawerContentProps) {
+  const { t } = useTranslation();
   const router = useRouter();
   const pathname = usePathname();
   const signOut = useAuthStore((state) => state.signOut);
   const user = useAuthStore((state) => state.user);
+  const sidebarSections = getSidebarSections(t);
 
   const handleSignOut = async () => {
     navigation.closeDrawer();
@@ -45,8 +50,10 @@ export function DrawerContent({ navigation }: DrawerContentProps) {
           showsVerticalScrollIndicator={false}
         >
           <View style={styles.header}>
-            <Text style={styles.headerTitle}>my-fpl-reborn</Text>
-            <Text style={styles.headerSubtitle}>Fantasy Premier League</Text>
+            <Text style={styles.headerTitle}>{t('navigation.appName')}</Text>
+            <Text style={styles.headerSubtitle}>
+              {t('navigation.appSubtitle')}
+            </Text>
           </View>
 
           {sidebarSections.map((section) => (
@@ -68,13 +75,17 @@ export function DrawerContent({ navigation }: DrawerContentProps) {
           ))}
 
           <View style={styles.section}>
-            <Text style={styles.sectionLabel}>Account</Text>
+            <Text style={styles.sectionLabel}>{t('auth.account')}</Text>
+            <View style={styles.languageRow}>
+              <Text style={styles.languageLabel}>{t('common.language')}</Text>
+              <LanguageSwitcher />
+            </View>
             {user ? (
               <Text style={styles.userEmail}>{user.email}</Text>
             ) : null}
-            <Pressable onPress={handleSignOut} style={styles.signOutButton}>
-              <Text style={styles.signOutText}>Sign out</Text>
-            </Pressable>
+            <AppPressable onPress={handleSignOut} style={styles.signOutButton}>
+              <Text style={styles.signOutText}>{t('auth.signOut')}</Text>
+            </AppPressable>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -122,6 +133,17 @@ const styles = StyleSheet.create({
     color: colors.sidebarTextSecondary,
     paddingHorizontal: 16,
     paddingBottom: 6,
+  },
+  languageRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    marginBottom: 12,
+  },
+  languageLabel: {
+    fontSize: 13,
+    color: colors.sidebarTextSecondary,
   },
   userEmail: {
     fontSize: 13,

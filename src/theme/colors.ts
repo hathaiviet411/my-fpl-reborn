@@ -15,4 +15,6 @@ export const colors = {
   backgroundBottom: '#E8E0F0',
   socialBorder: '#EFF0F6',
   white: '#FFFFFF',
+  textNormal: '#646982',
+  textExtraBold: '#32343E',
 } as const;

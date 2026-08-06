@@ -1,10 +1,13 @@
 import { DrawerToggleButton } from 'expo-router/drawer';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 
 import { colors } from '@/src/theme/colors';
 
 export default function TabsLayout() {
+  const { t } = useTranslation();
+
   return (
     <Tabs
       screenOptions={{
@@ -22,7 +25,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
+          title: t('navigation.home'),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="home" size={size} color={color} />
           ),
@@ -31,7 +34,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="squad"
         options={{
-          title: 'Squad',
+          title: t('navigation.squad'),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="people" size={size} color={color} />
           ),
@@ -40,7 +43,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="fixtures"
         options={{
-          title: 'Fixtures',
+          title: t('navigation.fixtures'),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="calendar" size={size} color={color} />
           ),
@@ -49,7 +52,7 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="leagues"
         options={{
-          title: 'Leagues',
+          title: t('navigation.leagues'),
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="trophy" size={size} color={color} />
           ),
