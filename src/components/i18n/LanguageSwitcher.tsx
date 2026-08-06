@@ -48,7 +48,11 @@ function localeToProgress(locale: AppLocale) {
   return locale === 'vi' ? 0 : 1;
 }
 
-export function LanguageSwitcher() {
+type LanguageSwitcherProps = {
+  fullWidth?: boolean;
+};
+
+export function LanguageSwitcher({ fullWidth = false }: LanguageSwitcherProps) {
   const locale = useLocaleStore((state) => state.locale);
   const setLocale = useLocaleStore((state) => state.setLocale);
 
@@ -100,9 +104,9 @@ export function LanguageSwitcher() {
       accessibilityRole="button"
       hitSlop={8}
       onPress={handlePress}
-      style={styles.pressable}
+      style={[styles.pressable, fullWidth && styles.pressableFullWidth]}
     >
-      <View style={styles.track}>
+      <View style={[styles.track, fullWidth && styles.trackFullWidth]}>
         <Animated.View
           pointerEvents="none"
           style={[styles.layout, vietnameseLayoutStyle]}
@@ -137,6 +141,9 @@ const styles = StyleSheet.create({
   pressable: {
     borderRadius: 10,
   },
+  pressableFullWidth: {
+    alignSelf: 'stretch',
+  },
   track: {
     width: TRACK_WIDTH,
     height: TRACK_HEIGHT,
@@ -145,6 +152,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.stroke,
     overflow: 'hidden',
+  },
+  trackFullWidth: {
+    width: '100%',
   },
   layout: {
     ...StyleSheet.absoluteFill,

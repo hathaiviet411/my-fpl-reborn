@@ -1,10 +1,10 @@
-import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { AppPressable } from '@/src/components/ui/AppPressable';
 import { colors } from '@/src/theme/colors';
 
-import type { SidebarItem } from './sidebarItems';
+import { TabBarIcon } from './TabBarIcon';
+import { SIDEBAR_ICON_SIZE, type SidebarItem } from './sidebarItems';
 
 type SidebarSourceRowProps = {
   item: SidebarItem;
@@ -17,9 +17,7 @@ export function SidebarSourceRow({
   selected,
   onPress,
 }: SidebarSourceRowProps) {
-  const iconName = selected
-    ? (item.icon.replace('-outline', '') as typeof item.icon)
-    : item.icon;
+  const iconColor = selected ? colors.primary : colors.sidebarTextSecondary;
 
   return (
     <AppPressable
@@ -28,12 +26,13 @@ export function SidebarSourceRow({
       onPress={onPress}
       style={[styles.row, selected && styles.rowSelected]}
     >
-      <Ionicons
-        name={iconName}
-        size={18}
-        color={selected ? colors.primary : colors.sidebarTextSecondary}
-        style={styles.icon}
-      />
+      <View style={styles.iconSlot}>
+        <TabBarIcon
+          Icon={item.Icon}
+          color={iconColor}
+          size={SIDEBAR_ICON_SIZE}
+        />
+      </View>
       <Text style={[styles.label, selected && styles.labelSelected]}>
         {item.label}
       </Text>
@@ -45,7 +44,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    minHeight: 34,
+    minHeight: 40,
     marginHorizontal: 8,
     marginVertical: 1,
     paddingHorizontal: 10,
@@ -54,11 +53,13 @@ const styles = StyleSheet.create({
   rowSelected: {
     backgroundColor: colors.sidebarSelection,
   },
-  icon: {
-    width: 22,
+  iconSlot: {
+    width: 28,
+    alignItems: 'center',
   },
   label: {
     fontSize: 15,
+    marginLeft: 10,
     color: colors.sidebarText,
   },
   labelSelected: {

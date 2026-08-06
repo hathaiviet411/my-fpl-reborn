@@ -2,7 +2,11 @@
   "common": {
     "comingSoonTitle": "Coming soon",
     "comingSoonMessage": "This feature is not available yet.",
-    "language": "Language"
+    "language": "Language",
+    "languageNames": {
+      "vi": "Vietnamese",
+      "en": "English"
+    }
   },
   "auth": {
     "logIn": "Log In",
@@ -45,14 +49,13 @@
     "home": "Home",
     "classSchedule": "Class schedule",
     "grades": "Grades",
-    "squad": "Squad",
-    "fixtures": "Fixtures",
-    "leagues": "Leagues",
     "notifications": "Notifications",
     "account": "Account",
     "navigation": "Navigation",
     "appName": "MyFPL",
-    "appSubtitle": "Fantasy Premier League"
+    "appSubtitle": "Fantasy Premier League",
+    "appSlogan": "Learn Practically – Practice Professionally",
+    "sidebarCopyright": "© 2026 FPT Polytechnic. All rights reserved."
   },
   "home": {
     "description": "Swipe from the left or tap the menu icon to open the sidebar."

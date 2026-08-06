@@ -1,16 +1,18 @@
 import { usePathname, useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { AppPressable } from '@/src/components/ui/AppPressable';
-import { LanguageSwitcher } from '@/src/components/i18n/LanguageSwitcher';
-import { useAuthStore } from '@/src/stores/authStore';
+import { SidebarLanguagePicker } from '@/src/components/i18n/SidebarLanguagePicker';
+import { authImages } from '@/src/features/auth/assets';
 import { colors } from '@/src/theme/colors';
+import { sidebarSloganFontFamily } from '@/src/theme/fonts';
 
 import { SidebarBackdrop } from './SidebarBackdrop';
 import { SidebarSourceRow } from './SidebarSourceRow';
 import { getSidebarSections } from './sidebarItems';
+
+const SIDEBAR_CONTACT_EMAIL = 'ctv.vietht@fpt.edu.vn';
 
 type DrawerContentProps = {
   navigation: {
@@ -20,7 +22,11 @@ type DrawerContentProps = {
 
 function isRouteSelected(pathname: string, route: string) {
   if (route === '/') {
-    return pathname === '/' || pathname === '/index';
+    return (
+      pathname === '/' ||
+      pathname === '/index' ||
+      pathname.endsWith('/index')
+    );
   }
 
   return pathname === route || pathname.startsWith(`${route}/`);
@@ -30,30 +36,30 @@ export function DrawerContent({ navigation }: DrawerContentProps) {
   const { t } = useTranslation();
   const router = useRouter();
   const pathname = usePathname();
-  const signOut = useAuthStore((state) => state.signOut);
-  const user = useAuthStore((state) => state.user);
   const sidebarSections = getSidebarSections(t);
-
-  const handleSignOut = async () => {
-    navigation.closeDrawer();
-    await signOut();
-    router.replace('/login');
-  };
 
   return (
     <View style={styles.root}>
       <SidebarBackdrop />
 
-      <SafeAreaView edges={['top', 'left', 'right']} style={styles.safeArea}>
+      <SafeAreaView edges={['top', 'left', 'right', 'bottom']} style={styles.safeArea}>
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
+          style={styles.scroll}
         >
           <View style={styles.header}>
-            <Text style={styles.headerTitle}>{t('navigation.appName')}</Text>
-            <Text style={styles.headerSubtitle}>
-              {t('navigation.appSubtitle')}
-            </Text>
+            <Image
+              accessibilityLabel="FPT Polytechnic"
+              resizeMode="contain"
+              source={authImages.loginLogo}
+              style={styles.logo}
+            />
+          </View>
+
+          <View style={styles.languageSection}>
+            <Text style={styles.languageTitle}>{t('common.language')}</Text>
+            <SidebarLanguagePicker />
           </View>
 
           {sidebarSections.map((section) => (
@@ -73,21 +79,20 @@ export function DrawerContent({ navigation }: DrawerContentProps) {
               ))}
             </View>
           ))}
-
-          <View style={styles.section}>
-            <Text style={styles.sectionLabel}>{t('auth.account')}</Text>
-            <View style={styles.languageRow}>
-              <Text style={styles.languageLabel}>{t('common.language')}</Text>
-              <LanguageSwitcher />
-            </View>
-            {user ? (
-              <Text style={styles.userEmail}>{user.email}</Text>
-            ) : null}
-            <AppPressable onPress={handleSignOut} style={styles.signOutButton}>
-              <Text style={styles.signOutText}>{t('auth.signOut')}</Text>
-            </AppPressable>
-          </View>
         </ScrollView>
+
+        <Text style={styles.footerSlogan}>
+          {`"${t('navigation.appSlogan')}"`}
+        </Text>
+
+        <View style={styles.footer}>
+          {/* <Text style={styles.footerEmail}>
+            {user?.email ?? SIDEBAR_CONTACT_EMAIL}
+          </Text> */}
+          <Text style={styles.footerCopyright}>
+            {t('navigation.sidebarCopyright')}
+          </Text>
+        </View>
       </SafeAreaView>
     </View>
   );
@@ -101,10 +106,14 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
   },
+  scroll: {
+    flex: 1,
+  },
   scrollContent: {
-    paddingBottom: 24,
+    paddingBottom: 16,
   },
   header: {
+    alignItems: 'center',
     paddingHorizontal: 16,
     paddingTop: 8,
     paddingBottom: 16,
@@ -112,15 +121,21 @@ const styles = StyleSheet.create({
     borderBottomColor: 'rgba(60, 60, 67, 0.18)',
     marginBottom: 12,
   },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: colors.sidebarText,
+  logo: {
+    width: 200,
+    height: 66,
   },
-  headerSubtitle: {
-    fontSize: 13,
+  languageSection: {
+    paddingHorizontal: 10,
+    marginBottom: 16,
+  },
+  languageTitle: {
+    fontSize: 11,
+    fontWeight: '600',
+    letterSpacing: 0.6,
+    textTransform: 'uppercase',
     color: colors.sidebarTextSecondary,
-    marginTop: 4,
+    marginBottom: 8,
   },
   section: {
     marginBottom: 8,
@@ -131,35 +146,34 @@ const styles = StyleSheet.create({
     letterSpacing: 0.6,
     textTransform: 'uppercase',
     color: colors.sidebarTextSecondary,
-    paddingHorizontal: 16,
+    paddingHorizontal: 10,
     paddingBottom: 6,
   },
-  languageRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+  footer: {
     paddingHorizontal: 16,
+    paddingTop: 12,
+    paddingBottom: 4,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: 'rgba(60, 60, 67, 0.18)',
+  },
+  footerEmail: {
+    fontSize: 12,
+    color: colors.sidebarTextSecondary,
     marginBottom: 12,
   },
-  languageLabel: {
-    fontSize: 13,
-    color: colors.sidebarTextSecondary,
-  },
-  userEmail: {
-    fontSize: 13,
-    color: colors.sidebarTextSecondary,
-    paddingHorizontal: 16,
+  footerSlogan: {
+    fontFamily: sidebarSloganFontFamily,
+    fontSize: 24,
+    fontWeight: '900',
+    letterSpacing: 0.2,
+    color: '#000000',
+    textAlign: 'center',
     marginBottom: 8,
   },
-  signOutButton: {
-    marginHorizontal: 8,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderRadius: 6,
-  },
-  signOutText: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: colors.primary,
+  footerCopyright: {
+    fontSize: 10,
+    color: colors.sidebarTextSecondary,
+    textAlign: 'center',
+    lineHeight: 16,
   },
 });

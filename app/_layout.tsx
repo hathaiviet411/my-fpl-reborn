@@ -1,6 +1,7 @@
 import '@/src/core/i18n';
 import '@/src/core/text/setupGlobalText';
 
+import { useFonts } from '@expo-google-fonts/lavishly-yours/useFonts';
 import { GradientView } from '@/src/components/ui/GradientView';
 import { NetworkLoggerProvider } from '@/src/components/dev/NetworkLoggerProvider';
 import { Slot } from 'expo-router';
@@ -15,6 +16,7 @@ import { setupNetworkLogger } from '@/src/core/http/setupNetworkLogger';
 import { useAuthGuard } from '@/src/features/auth/hooks/useAuthGuard';
 import { useLocaleStore } from '@/src/stores/localeStore';
 import { colors } from '@/src/theme/colors';
+import { sidebarSloganFonts } from '@/src/theme/fonts';
 
 if (__DEV__) {
   require('@/src/config/reactotron');
@@ -26,12 +28,13 @@ function RootNavigator() {
   const { isHydrated: isAuthHydrated } = useAuthGuard({ mode: 'root' });
   const isLocaleHydrated = useLocaleStore((state) => state.isHydrated);
   const hydrateLocale = useLocaleStore((state) => state.hydrate);
+  const [fontsLoaded] = useFonts(sidebarSloganFonts);
 
   useEffect(() => {
     void hydrateLocale();
   }, [hydrateLocale]);
 
-  if (!isAuthHydrated || !isLocaleHydrated) {
+  if (!isAuthHydrated || !isLocaleHydrated || !fontsLoaded) {
     return (
       <View style={styles.splash}>
         <GradientView

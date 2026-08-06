@@ -2,7 +2,11 @@
   "common": {
     "comingSoonTitle": "Sắp ra mắt",
     "comingSoonMessage": "Tính năng này chưa khả dụng.",
-    "language": "Ngôn ngữ"
+    "language": "Ngôn ngữ",
+    "languageNames": {
+      "vi": "Tiếng Việt",
+      "en": "Tiếng Anh"
+    }
   },
   "auth": {
     "logIn": "Đăng nhập",
@@ -45,14 +49,13 @@
     "home": "Trang chủ",
     "classSchedule": "Lịch học",
     "grades": "Bảng điểm",
-    "squad": "Đội hình",
-    "fixtures": "Lịch thi đấu",
-    "leagues": "Giải đấu",
     "notifications": "Thông báo",
     "account": "Tài khoản",
     "navigation": "Điều hướng",
     "appName": "MyFPL",
-    "appSubtitle": "Fantasy Premier League"
+    "appSubtitle": "Fantasy Premier League",
+    "appSlogan": "Thực học – Thực nghiệp",
+    "sidebarCopyright": "© 2026 FPT Polytechnic. Giữ toàn bộ quyền bản quyền."
   },
   "home": {
     "description": "Vuốt từ cạnh trái hoặc chạm biểu tượng menu để mở thanh bên."
