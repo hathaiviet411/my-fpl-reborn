@@ -7,8 +7,8 @@ export default function LeaguesScreen() {
 
   return (
     <ScreenPlaceholder
-      title={t('navigation.leagues')}
-      description={t('leagues.description')}
+      title={t('navigation.grades')}
+      description={t('grades.description')}
     />
   );
 }

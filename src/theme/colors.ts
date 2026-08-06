@@ -14,6 +14,7 @@ export const colors = {
   backgroundTop: '#F5E6D8',
   backgroundBottom: '#E8E0F0',
   socialBorder: '#EFF0F6',
+  tabBarInactive: '#FF9F66',
   white: '#FFFFFF',
   textNormal: '#646982',
   textExtraBold: '#32343E',

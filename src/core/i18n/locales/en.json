@@ -43,9 +43,13 @@
   },
   "navigation": {
     "home": "Home",
+    "classSchedule": "Class schedule",
+    "grades": "Grades",
     "squad": "Squad",
     "fixtures": "Fixtures",
     "leagues": "Leagues",
+    "notifications": "Notifications",
+    "account": "Account",
     "navigation": "Navigation",
     "appName": "MyFPL",
     "appSubtitle": "Fantasy Premier League"
@@ -59,7 +63,19 @@
   "fixtures": {
     "description": "View upcoming and past gameweek fixtures."
   },
+  "classSchedule": {
+    "description": "View your class schedule."
+  },
+  "grades": {
+    "description": "View your grades and standings."
+  },
   "leagues": {
     "description": "Browse your classic and head-to-head leagues."
+  },
+  "notifications": {
+    "description": "FPL alerts and match reminders will appear here."
+  },
+  "account": {
+    "description": "Manage your profile and app preferences."
   }
 }

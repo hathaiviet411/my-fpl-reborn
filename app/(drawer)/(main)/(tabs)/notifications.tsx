@@ -2,13 +2,13 @@ import { useTranslation } from 'react-i18next';
 
 import { ScreenPlaceholder } from '@/src/components/ScreenPlaceholder';
 
-export default function FixturesScreen() {
+export default function NotificationsScreen() {
   const { t } = useTranslation();
 
   return (
     <ScreenPlaceholder
-      title={t('navigation.classSchedule')}
-      description={t('classSchedule.description')}
+      description={t('notifications.description')}
+      title={t('navigation.notifications')}
     />
   );
 }

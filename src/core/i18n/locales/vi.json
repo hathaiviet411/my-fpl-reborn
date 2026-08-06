@@ -43,9 +43,13 @@
   },
   "navigation": {
     "home": "Trang chủ",
+    "classSchedule": "Lịch học",
+    "grades": "Bảng điểm",
     "squad": "Đội hình",
     "fixtures": "Lịch thi đấu",
     "leagues": "Giải đấu",
+    "notifications": "Thông báo",
+    "account": "Tài khoản",
     "navigation": "Điều hướng",
     "appName": "MyFPL",
     "appSubtitle": "Fantasy Premier League"
@@ -59,7 +63,19 @@
   "fixtures": {
     "description": "Xem lịch thi đấu các vòng sắp tới và đã qua."
   },
+  "classSchedule": {
+    "description": "Xem lịch học của bạn."
+  },
+  "grades": {
+    "description": "Xem bảng điểm và xếp hạng của bạn."
+  },
   "leagues": {
     "description": "Duyệt các giải classic và head-to-head của bạn."
+  },
+  "notifications": {
+    "description": "Cảnh báo FPL và nhắc trận sẽ hiển thị tại đây."
+  },
+  "account": {
+    "description": "Quản lý hồ sơ và tùy chọn ứng dụng."
   }
 }
