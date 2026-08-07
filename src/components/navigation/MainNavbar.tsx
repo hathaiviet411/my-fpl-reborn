@@ -8,6 +8,7 @@ import {
   NAVBAR_CONTENT_HEIGHT,
   NAVBAR_HORIZONTAL_PADDING,
   NAVBAR_RIGHT_ACTIONS_GAP,
+  NAVBAR_TITLE_SIDE_INSET,
 } from '@/src/components/navigation/navbarConfig';
 import { colors } from '@/src/theme/colors';
 
@@ -52,9 +53,11 @@ export function MainNavbar(props: MainNavbarProps) {
           <DrawerToggleButton tintColor={colors.headerOnPrimary} />
         </View>
 
-        <Text numberOfLines={1} style={styles.title}>
-          {title}
-        </Text>
+        <View pointerEvents="none" style={styles.titleSlot}>
+          <Text numberOfLines={1} style={styles.title}>
+            {title}
+          </Text>
+        </View>
 
         <View style={styles.rightActions}>
           <NavbarAvatar />
@@ -73,22 +76,34 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: NAVBAR_HORIZONTAL_PADDING,
-    gap: 8,
   },
   leftActions: {
+    zIndex: 2,
     flexDirection: 'row',
     alignItems: 'center',
-    minWidth: 48,
+    minWidth: 40,
+  },
+  titleSlot: {
+    position: 'absolute',
+    left: NAVBAR_TITLE_SIDE_INSET,
+    right: NAVBAR_TITLE_SIDE_INSET,
+    top: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 1,
   },
   title: {
-    flex: 1,
+    width: '100%',
     textAlign: 'center',
     fontSize: 17,
     fontWeight: '600',
     color: colors.headerOnPrimary,
   },
   rightActions: {
+    zIndex: 2,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',

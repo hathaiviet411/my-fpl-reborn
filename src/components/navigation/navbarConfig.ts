@@ -12,4 +12,7 @@ export const NAVBAR_ACTION_ICON_SIZE = 20;
 /** Horizontal gap between avatar and QR on the right side of the navbar. */
 export const NAVBAR_RIGHT_ACTIONS_GAP = 16;
 
+/** Horizontal inset so centered title does not overlap side actions. */
+export const NAVBAR_TITLE_SIDE_INSET = 112;
+
 export const NAVBAR_HORIZONTAL_PADDING = 12;

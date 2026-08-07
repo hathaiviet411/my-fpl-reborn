@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { ImageSourcePropType } from 'react-native';
 
 import { resolvePersistedDefaultAvatarSource } from '@/src/features/avatar/persistedDefaultAvatar';
@@ -8,14 +8,30 @@ type UseAvatarImageSourceParams = {
   userKey?: string | null;
 };
 
+const avatarSourceCache = new Map<string, ImageSourcePropType>();
+
+function resolveCacheKey(userKey?: string | null) {
+  if (!userKey) {
+    return null;
+  }
+
+  const trimmed = userKey.trim();
+  return trimmed.length > 0 ? trimmed : 'guest';
+}
+
 export function useAvatarImageSource({
   avatarImage,
   userKey,
 }: UseAvatarImageSourceParams) {
+  const cacheKey = useMemo(() => resolveCacheKey(userKey), [userKey]);
+  const cachedSource = cacheKey ? avatarSourceCache.get(cacheKey) : null;
+
   const [defaultSource, setDefaultSource] = useState<ImageSourcePropType | null>(
-    null,
+    cachedSource,
   );
-  const [isLoading, setIsLoading] = useState(!avatarImage);
+  const [isLoading, setIsLoading] = useState(
+    !avatarImage && Boolean(cacheKey) && !cachedSource,
+  );
 
   useEffect(() => {
     if (avatarImage) {
@@ -23,22 +39,36 @@ export function useAvatarImageSource({
       return;
     }
 
+    if (!cacheKey) {
+      setDefaultSource(null);
+      setIsLoading(true);
+      return;
+    }
+
+    const cached = avatarSourceCache.get(cacheKey);
+    if (cached) {
+      setDefaultSource(cached);
+      setIsLoading(false);
+      return;
+    }
+
     let cancelled = false;
     setIsLoading(true);
 
-    void resolvePersistedDefaultAvatarSource(userKey?.trim() || 'guest').then(
-      (source) => {
-        if (!cancelled) {
-          setDefaultSource(source);
-          setIsLoading(false);
-        }
-      },
-    );
+    void resolvePersistedDefaultAvatarSource(cacheKey).then((source) => {
+      if (cancelled) {
+        return;
+      }
+
+      avatarSourceCache.set(cacheKey, source);
+      setDefaultSource(source);
+      setIsLoading(false);
+    });
 
     return () => {
       cancelled = true;
     };
-  }, [avatarImage, userKey]);
+  }, [avatarImage, cacheKey]);
 
   if (avatarImage) {
     return {

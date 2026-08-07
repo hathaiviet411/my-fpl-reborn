@@ -14,9 +14,11 @@ type NavbarAvatarProps = {
 
 export function NavbarAvatar({ avatarImage = null }: NavbarAvatarProps) {
   const user = useAuthStore((state) => state.user);
-  const { source, isLoading } = useAvatarImageSource({
+  const isAuthHydrated = useAuthStore((state) => state.isHydrated);
+  const userKey = isAuthHydrated ? user?.email ?? 'guest' : null;
+  const { source } = useAvatarImageSource({
     avatarImage,
-    userKey: user?.email,
+    userKey,
   });
 
   const imageSize =
@@ -24,7 +26,7 @@ export function NavbarAvatar({ avatarImage = null }: NavbarAvatarProps) {
 
   return (
     <View style={styles.shell}>
-      {source && !isLoading ? (
+      {source ? (
         <Image
           accessibilityLabel={user?.name ?? 'Student avatar'}
           resizeMode="cover"
