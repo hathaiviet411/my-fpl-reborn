@@ -1,17 +1,22 @@
 import { useCallback, useEffect, useState } from 'react';
 import { CameraView, scanFromURLAsync } from 'expo-camera';
-import type { BarcodeScanningResult } from 'expo-camera';
+import type { BarcodeScanningResult, CameraType } from 'expo-camera';
 import { useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import { useTranslation } from 'react-i18next';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import {
+  Alert,
+  LayoutChangeEvent,
+  StyleSheet,
+  View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { AppPressable } from '@/src/components/ui/AppPressable';
 import { QRScanOverlay } from '@/src/features/qr/components/QRScanOverlay';
+import { QRScannerBottomChrome } from '@/src/features/qr/components/QRScannerBottomChrome';
+import { QRScannerTopChrome } from '@/src/features/qr/components/QRScannerTopChrome';
 import { useQRScannerPermissions } from '@/src/features/qr/hooks/useQRScannerPermissions';
 import { handleScanResult } from '@/src/features/qr/utils/handleScanResult';
-import { colors } from '@/src/theme/colors';
 
 export function QRScannerCameraContent() {
   const { t } = useTranslation();
@@ -20,6 +25,14 @@ export function QRScannerCameraContent() {
     useQRScannerPermissions();
   const [scanned, setScanned] = useState(false);
   const [cameraReady, setCameraReady] = useState(false);
+  const [facing, setFacing] = useState<CameraType>('back');
+  const [torchEnabled, setTorchEnabled] = useState(false);
+  const [layout, setLayout] = useState({ width: 0, height: 0 });
+
+  const handleLayout = useCallback((event: LayoutChangeEvent) => {
+    const { width, height } = event.nativeEvent.layout;
+    setLayout({ width, height });
+  }, []);
 
   useEffect(() => {
     void (async () => {
@@ -96,56 +109,44 @@ export function QRScannerCameraContent() {
     setScanned(false);
   }, []);
 
+  const handleToggleFacing = useCallback(() => {
+    setFacing((current) => (current === 'back' ? 'front' : 'back'));
+  }, []);
+
+  const handleToggleTorch = useCallback(() => {
+    setTorchEnabled((current) => !current);
+  }, []);
+
   return (
-    <View style={styles.root}>
+    <View style={styles.root} onLayout={handleLayout}>
       {cameraReady ? (
         <CameraView
           barcodeScannerSettings={{ barcodeTypes: ['qr'] }}
+          enableTorch={torchEnabled}
+          facing={facing}
           onBarcodeScanned={scanned ? undefined : handleBarcodeScanned}
           style={StyleSheet.absoluteFill}
         />
       ) : null}
 
-      <QRScanOverlay />
+      <QRScanOverlay height={layout.height} width={layout.width} />
 
-      <SafeAreaView edges={['top', 'bottom']} style={styles.chrome}>
-        <View style={styles.header}>
-          <AppPressable
-            accessibilityLabel={t('qr.close')}
-            accessibilityRole="button"
-            onPress={() => router.back()}
-            style={styles.closeButton}
-          >
-            <Text style={styles.closeLabel}>{t('qr.close')}</Text>
-          </AppPressable>
-          <Text style={styles.title}>{t('qr.title')}</Text>
-          <View style={styles.headerSpacer} />
-        </View>
-
-        <View style={styles.footer}>
-          <AppPressable
-            accessibilityRole="button"
-            onPress={() => {
-              void handlePickFromGallery();
-            }}
-            style={styles.footerButton}
-          >
-            <Text style={styles.footerButtonLabel}>
-              {t('qr.uploadFromGallery')}
-            </Text>
-          </AppPressable>
-
-          {scanned ? (
-            <AppPressable
-              accessibilityRole="button"
-              onPress={handleScanAgain}
-              style={[styles.footerButton, styles.scanAgainButton]}
-            >
-              <Text style={styles.footerButtonLabel}>{t('qr.scanAgain')}</Text>
-            </AppPressable>
-          ) : null}
-        </View>
+      <SafeAreaView edges={['top']} style={styles.topChrome}>
+        <QRScannerTopChrome
+          onBack={() => router.back()}
+          onToggleFacing={handleToggleFacing}
+          onToggleTorch={handleToggleTorch}
+          torchEnabled={torchEnabled}
+        />
       </SafeAreaView>
+
+      <QRScannerBottomChrome
+        onOpenGallery={() => {
+          void handlePickFromGallery();
+        }}
+        onScanAgain={handleScanAgain}
+        showScanAgain={scanned}
+      />
     </View>
   );
 }
@@ -155,53 +156,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#000',
   },
-  chrome: {
-    flex: 1,
-    justifyContent: 'space-between',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 8,
-  },
-  closeButton: {
-    minWidth: 64,
-    paddingVertical: 8,
-  },
-  closeLabel: {
-    color: colors.white,
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  title: {
-    flex: 1,
-    textAlign: 'center',
-    color: colors.white,
-    fontSize: 17,
-    fontWeight: '600',
-  },
-  headerSpacer: {
-    minWidth: 64,
-  },
-  footer: {
-    gap: 12,
-    paddingHorizontal: 16,
-    paddingBottom: 16,
-  },
-  footerButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.16)',
-    borderRadius: 12,
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    alignItems: 'center',
-  },
-  scanAgainButton: {
-    backgroundColor: colors.primary,
-  },
-  footerButtonLabel: {
-    color: colors.white,
-    fontSize: 15,
-    fontWeight: '600',
+  topChrome: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 2,
   },
 });
